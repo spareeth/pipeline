@@ -118,7 +118,7 @@ def main(data, infolder):
                 yr = out1.rsplit('.',3)[0][3:][:4]
                 mm = out1.rsplit('.',3)[0][8:][:9]
                 in1 = 'NETCDF' + ':"' + INDAT + '/rfe' + yr + '_' + mm + '.v3.1.nc":rfe_filled'
-                out = mapset + '_rfe' + yr + '_' + mm
+                out = "tamsat" + '_rfe' + yr + '_' + mm
                 r.in_gdal(input=in1, output=out, flags="o", overwrite=True)
 
         if data == 'tamsat_daily':
@@ -131,7 +131,7 @@ def main(data, infolder):
                 mm = out1.rsplit('.',3)[0][8:10]
                 dd = out1.rsplit('.',3)[0][11:14]
                 in1 = 'NETCDF' + ':"' + INDAT + '/rfe' + yr + '_' + mm + '_'+ dd + '.v3.1.nc":rfe_filled'
-                out = mapset + '_rfe' + yr + '_' + mm + '_' + dd
+                out = "tamsat" + '_rfe' + yr + '_' + mm + '_' + dd
                 r.in_gdal(input=in1, output=out, flags="o", overwrite=True)
         
         ## Data source for Chirps - # Chirps monthly: https://data.chc.ucsb.edu/products/CHIRPS-2.0/global_monthly/tifs/

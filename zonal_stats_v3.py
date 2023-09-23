@@ -141,7 +141,7 @@ def main(lu, infile, data, method, start, end):
             r.mask(raster="worldcover", maskcats='20 30')
         else:
             print('No mask')
-            
+
         filename = str(uuid.uuid4())
         tmp=os.path.join(indat, filename)
 
@@ -150,7 +150,7 @@ def main(lu, infile, data, method, start, end):
             if data == 'chirps':
                 pattern=mapset + "_monthly_" + yr + "_*"
             elif data == 'tamsat_monthly' or data == 'tamsat_daily':
-                pattern=mapset + "_rfe" + yr + "_*"
+                pattern="tamsat" + "_rfe" + yr + "_*"
             else:
                 pattern=mapset + "_" + yr + "_*" + p1
             out=tmp + "_" + yr + ".txt"
