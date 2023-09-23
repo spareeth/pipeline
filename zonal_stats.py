@@ -171,7 +171,7 @@ def main(sh, gr, cr, sg, infile, data, method, outfolder, suffixcsv, start, end)
                 in2=line.strip('\n')
                 v.rast_stats(map='bnds', raster=in2, column_prefix=in2, method=method)
 
-        if lu:
+        if sh or gr or cr or sg:
             r.mask(flags="r")
 
         now = datetime.now()
