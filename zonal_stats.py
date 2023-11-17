@@ -43,11 +43,11 @@ import click
 @click.argument('data')
 @click.argument('method')
 @click.argument('outfolder')
-@click.argument('suffixcsv')
+@click.argument('outcsv')
 @click.argument('start', type=int)
 @click.argument('end', type=int)
 
-def main(sh, gr, cr, sg, bnd, data, method, outfolder, suffixcsv, start, end):
+def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
     """ Extract statistics based on a vector boundary from raster time series
       
         Arguments:
@@ -60,7 +60,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, suffixcsv, start, end):
 
         outfolder - Add the full path to the folder where extracted csv will be stored
 
-        suffixcsv - suffix for the csv file name (string - for example - "2023")
+        outcsv - output csv file name (string, without extension)
 
         start - start year
 
@@ -71,7 +71,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, suffixcsv, start, end):
         data = r"%s" %str(data)
         method = r"%s" %str(method)
         outfolder = r"%s" %str(outfolder)
-        suffixcsv = r"%s" %str(suffixcsv)
+        outcsv = r"%s" %str(outcsv)
         #start = r"%s" %str(start)
         #end = r"%s" %str(end)
 
@@ -183,8 +183,9 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, suffixcsv, start, end):
         now = datetime.now()
         a = int(now.strftime('%Y%m%d%H%M%S'))
 
-        outfile="stats_" + str(a) + "_" + suffixcsv + ".csv"
-        outfile1=os.path.join(outfolder, outfile)
+        #outfile="stats_" + str(a) + "_" + suffixcsv + ".csv"
+        outfile=outcsv + ".csv"
+        outfile1=os.path.join(outfolder, outcsv)
         v.out_ogr(input='bnds', output=outfile1, format='CSV')
         user.close()
     finally:
