@@ -39,7 +39,7 @@ import click
 @click.option('--gr', is_flag=True, help="If true, will apply Land use mask on grassland")
 @click.option('--cr', is_flag=True, help="If true, will apply Land use mask on cropland")
 @click.option('--sg', is_flag=True, help="If true, will apply Land use mask on shrubland & grassland")
-@click.argument('infile')
+@click.argument('bnd')
 @click.argument('data')
 @click.argument('method')
 @click.argument('outfolder')
@@ -47,14 +47,14 @@ import click
 @click.argument('start', type=int)
 @click.argument('end', type=int)
 
-def main(sh, gr, cr, sg, infile, data, method, outfolder, suffixcsv, start, end):
+def main(sh, gr, cr, sg, bnd, data, method, outfolder, suffixcsv, start, end):
     """ Extract statistics based on a vector boundary from raster time series
       
         Arguments:
         
-        infile - Add the full path to the shapefile (only the file with extension '.shp'
+        bnd - Name of the boundary for which statistics needed (use listing of vector boundaries to see the available boundaries)
 
-        data - Options are viirs_ndvi, viirs_ndviano, modis_ndvi, modis_ndviano, chirps, tamsat_monthly, tamsat_daily
+        data - Options are viirs_ndvi_ea, viirs_ndviano_ea, viirs_ndvi_sa, viirs_ndviano_sa, modis_ndvi, modis_ndviano, chirps, tamsat_monthly, tamsat_daily
 
         method - statistical metric to be computed - average, minimum, maximum, stddev, median
 
@@ -67,7 +67,7 @@ def main(sh, gr, cr, sg, infile, data, method, outfolder, suffixcsv, start, end)
         end - end year 
     """
     try:
-        infile = r"%s" %str(infile)
+        bnd = r"%s" %str(bnd)
         data = r"%s" %str(data)
         method = r"%s" %str(method)
         outfolder = r"%s" %str(outfolder)
@@ -75,14 +75,20 @@ def main(sh, gr, cr, sg, infile, data, method, outfolder, suffixcsv, start, end)
         #start = r"%s" %str(start)
         #end = r"%s" %str(end)
 
-        basepath=os.path.dirname(infile)
+        #basepath=os.path.dirname(infile)
         gisdb='/home/ubuntu/s3-mount/mapdata'
         location='latlong'
-        if data == 'viirs_ndvi':
+        if data == 'viirs_ndvi_ea':
             mapset = 'ndvi_viirs'
             p1 = ''
-        elif data == 'viirs_ndviano':
+        elif data == 'viirs_ndviano_ea':
             mapset = 'ndviano_viirs'
+            p1 = ''
+        elif data == 'viirs_ndvi_sa':
+            mapset = 'sandvi_viirs'
+            p1 = ''
+        elif data == 'viirs_ndviano_sa':
+            mapset = 'sandviano_viirs'
             p1 = ''
         elif data == 'modis_ndvi':
             mapset = 'ndvi_modis'
@@ -127,9 +133,9 @@ def main(sh, gr, cr, sg, infile, data, method, outfolder, suffixcsv, start, end)
         years = list(timerange)
         years_str = [str(s) for s in years]
 
-        grass.run_command("v.import", input=infile, output="bnds", overwrite=True)
+        #grass.run_command("v.import", input=infile, output="bnds", overwrite=True)
         #maps = ["ndvi_annual_" + s for s in years_str]
-        g.region(vector="bnds", res=0.003)
+        g.region(vector=bnd, res=0.003)
 
         if sh:
             r.mask(raster="worldcover", maskcats='20')
@@ -169,7 +175,7 @@ def main(sh, gr, cr, sg, infile, data, method, outfolder, suffixcsv, start, end)
         with open(out1) as tmpfile:
             for line in tmpfile:
                 in2=line.strip('\n')
-                v.rast_stats(map='bnds', raster=in2, column_prefix=in2, method=method)
+                v.rast_stats(map=bnd, raster=in2, column_prefix=in2, method=method)
 
         if sh or gr or cr or sg:
             r.mask(flags="r")

@@ -38,7 +38,7 @@ def main(data, infolder):
         
         Arguments:
         
-        data - Options are viirs_ndvi, viirs_ndviano, chirps, tamsat_monthly, tamsat_daily
+        data - Options are viirs_ndvi_ea, viirs_ndviano_ea, viirs_ndvi_sa, viirs_ndviano_sa chirps, tamsat_monthly, tamsat_daily
 
         infolder - Add the full path to the folder where list of downloaded zip files are stored
 
@@ -48,10 +48,14 @@ def main(data, infolder):
         data = r"%s" %str(data)
         gisdb = '/home/ubuntu/s3-mount/mapdata'
         location = 'latlong'
-        if data == 'viirs_ndvi':
+        if data == 'viirs_ndvi_ea':
             mapset = 'ndvi_viirs'
-        elif data == 'viirs_ndviano':
+        elif data == 'viirs_ndviano_ea':
             mapset = 'ndviano_viirs'
+        elif data == 'viirs_ndviano_sa':
+            mapset = 'sandviano_viirs'
+        elif data == 'viirs_ndviano_sa':
+            mapset = 'sandviano_viirs'
         elif data == 'modis_ndvi':
             mapset = 'ndvi_modis'
         elif data == 'modis_ndvi':
