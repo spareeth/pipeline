@@ -38,7 +38,7 @@ def main(data, infolder):
         
         Arguments:
         
-        data - Options are viirs_ndvi_ea, viirs_ndviano_ea, viirs_ndvi_sa, viirs_ndviano_sa chirps, tamsat_monthly, tamsat_daily
+        data - Options are viirs_ndvi_ea, viirs_ndviano_ea, viirs_ndvi_sa, viirs_ndviano_sa, chirps, tamsat_monthly, tamsat_daily
 
         infolder - Add the full path to the folder where list of downloaded zip files are stored
 
@@ -86,7 +86,7 @@ def main(data, infolder):
         #user.open(gisdb=gisdb, location=location, mapset=mapset)
         session = gsetup.init(gisdb, location, mapset)
 
-        if data == 'viirs_ndvi' or data == 'viirs_ndviano':
+        if data == 'viirs_ndvi_ea' or data == 'viirs_ndviano_ea' or data == 'viirs_ndvi_sa' or data == 'viirs_ndviano_sa':
             s1="*.zip"
             pt1=os.path.join(INDAT, s1)
             listzip=glob.glob(pt1)
