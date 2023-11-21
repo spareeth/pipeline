@@ -46,6 +46,7 @@ def main(data, infolder):
     try:
         ## USER INPUTS ##
         data = r"%s" %str(data)
+        INDAT = r"%s" %str(infolder)
         gisdb = '/home/ubuntu/s3-mount/mapdata'
         location = 'latlong'
         if data == 'viirs_ndvi_ea':
@@ -54,8 +55,8 @@ def main(data, infolder):
             mapset = 'ndviano_viirs'
         elif data == 'viirs_ndviano_sa':
             mapset = 'sandviano_viirs'
-        elif data == 'viirs_ndviano_sa':
-            mapset = 'sandviano_viirs'
+        elif data == 'viirs_ndvi_sa':
+            mapset = 'sandvi_viirs'
         elif data == 'modis_ndvi':
             mapset = 'ndvi_modis'
         elif data == 'modis_ndvi':
@@ -71,7 +72,6 @@ def main(data, infolder):
             return
 
         print(mapset)
-        INDAT = r"%s" %str(infolder)
         # Python path: we ask GRASS GIS where its Python packages are
         sys.path.append(
             subprocess.check_output(["grass", "--config", "python_path"], text=True).strip()
