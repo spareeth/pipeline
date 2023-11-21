@@ -186,8 +186,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         #outfile="stats_" + str(a) + "_" + suffixcsv + ".csv"
         outfile=outcsv + ".csv"
-        outfile1=os.path.join(outfolder, outcsv)
-        v.out_ogr(input='bnds', output=outfile1, format='CSV')
+        outfile1=os.path.join(outfolder, outfile)
+        v.out_ogr(input='bnd', output=outfile1, format='CSV')
         user.close()
     finally:
         #####CLEANUP
@@ -198,8 +198,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         locpth=os.path.join(gisdb, location, jobid)
 
-        ##if os.path.exists(locpth) and os.path.isdir(locpth):
-         ##   shutil.rmtree(locpth)
+        if os.path.exists(locpth) and os.path.isdir(locpth):
+           shutil.rmtree(locpth)
 
 if __name__ == '__main__':
     main()
