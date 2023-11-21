@@ -136,7 +136,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         #grass.run_command("v.import", input=infile, output="bnds", overwrite=True)
         #maps = ["ndvi_annual_" + s for s in years_str]
         g.region(vector=bnd, res=0.003)
-        grass.run_command('g.copy', vector='bnd,bnd')
+        grass.run_command('g.copy', vector=(bnd,'bnd'))
 
         if sh:
             r.mask(raster="worldcover", maskcats='20')
@@ -176,7 +176,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         with open(out1) as tmpfile:
             for line in tmpfile:
                 in2=line.strip('\n')
-                v.rast_stats(map=bnd, raster=in2, column_prefix=in2, method=method)
+                v.rast_stats(map='bnd', raster=in2, column_prefix=in2, method=method)
 
         if sh or gr or cr or sg:
             r.mask(flags="r")
