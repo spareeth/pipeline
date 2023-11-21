@@ -90,6 +90,7 @@ def main(data, infolder):
             s1="*.zip"
             pt1=os.path.join(INDAT, s1)
             listzip=glob.glob(pt1)
+            print(listzip)
             for dt1 in listzip:
                 with zipfile.ZipFile(dt1, 'r') as zip_ref:
                     zip_ref.extractall(INDAT)
