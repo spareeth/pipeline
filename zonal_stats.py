@@ -136,6 +136,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         #grass.run_command("v.import", input=infile, output="bnds", overwrite=True)
         #maps = ["ndvi_annual_" + s for s in years_str]
         g.region(vector=bnd, res=0.003)
+        grass.run_command('g.copy', vector=bnd,bnd)
 
         if sh:
             r.mask(raster="worldcover", maskcats='20')
@@ -197,8 +198,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         locpth=os.path.join(gisdb, location, jobid)
 
-        if os.path.exists(locpth) and os.path.isdir(locpth):
-            shutil.rmtree(locpth)
+        ##if os.path.exists(locpth) and os.path.isdir(locpth):
+         ##   shutil.rmtree(locpth)
 
 if __name__ == '__main__':
     main()
