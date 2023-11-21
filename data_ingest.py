@@ -105,7 +105,7 @@ def main(data, infolder):
                 #out2=out1.rsplit('.',1)[0]
                 yr = out1.rsplit('.',1)[0][2:][:2]
                 yy = '20'+yr
-                dt = out1.rsplit('.',1)[0][4:][:4]
+                dt = out1.rsplit('.',1)[0][4:][:2]
                 out = mapset + '_' + yy + '_' + dt
                 r.in_gdal(input=dt2, output=out, overwrite=True)
                 ##grass.run_command("r.in.gdal", input=dt, output=out2, overwrite=True)
