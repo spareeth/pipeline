@@ -38,7 +38,7 @@ def main(data, infolder):
         
         Arguments:
         
-        data - Options are viirs_ndvi_ea, viirs_ndviano_ea, viirs_ndvi_sa, viirs_ndviano_sa, chirps, tamsat_monthly, tamsat_daily
+        data - Options are arc2, chirps, tamsat_monthly, tamsat_daily, eandvi_viirs, eandviano_viirs, eandvi_modis, eandviano_modis, sandvi_viirs, sandviano_viirs, sandvi_modis, sandviano_modis
 
         infolder - Add the full path to the folder where list of downloaded zip files are stored
 
@@ -49,24 +49,30 @@ def main(data, infolder):
         INDAT = r"%s" %str(infolder)
         gisdb = '/home/ubuntu/s3-mount/mapdata'
         location = 'latlong'
-        if data == 'viirs_ndvi_ea':
-            mapset = 'ndvi_viirs'
-        elif data == 'viirs_ndviano_ea':
-            mapset = 'ndviano_viirs'
-        elif data == 'viirs_ndviano_sa':
-            mapset = 'sandviano_viirs'
-        elif data == 'viirs_ndvi_sa':
+        if data == 'eandvi_viirs':
+            mapset = 'eandvi_viirs'
+        elif data == 'eandviano_viirs':
+            mapset = 'eandviano_viirs'
+        elif data == 'sandvi_viirs':
             mapset = 'sandvi_viirs'
-        elif data == 'modis_ndvi':
-            mapset = 'ndvi_modis'
-        elif data == 'modis_ndvi':
-            mapset = 'ndviano_modis'
+        elif data == 'sandviano_viirs':
+            mapset = 'sandviano_viirs'
+        elif data == 'eandvi_modis':
+            mapset = 'eandvi_modis'
+        elif data == 'eandviano_modis':
+            mapset = 'eandviano_modis'
+        elif data == 'sandvi_modis':
+            mapset = 'sandvi_modis'
+        elif data == 'sandviano_modis':
+            mapset = 'sandviano_modis'
         elif data == 'tamsat_monthly':
-            mapset = 'tamsat'
+            mapset = 'tamsat_monthly'
         elif data == 'tamsat_daily':
             mapset = 'tamsat_daily'
         elif data == 'chirps':
             mapset = 'chirps'
+        elif data == 'arc2':
+            mapset = 'arc2'
         else:
             print('data is not supported')
             return
@@ -86,7 +92,7 @@ def main(data, infolder):
         #user.open(gisdb=gisdb, location=location, mapset=mapset)
         session = gsetup.init(gisdb, location, mapset)
 
-        if data == 'viirs_ndvi_ea' or data == 'viirs_ndviano_ea' or data == 'viirs_ndvi_sa' or data == 'viirs_ndviano_sa':
+        if data == 'eandvi_viirs' or data == 'eandviano_viirs' or data == 'sandvi_viirs' or data == 'sandviano_viirs':
             s1="*.zip"
             pt1=os.path.join(INDAT, s1)
             listzip=glob.glob(pt1)
@@ -157,9 +163,36 @@ def main(data, infolder):
                 out = 'chirps_monthly_' + yr + '_' + mm
                 r.in_gdal(input=in2, output=out, flags="o", overwrite=True)
 
+        ## ARC2 Precipitation data
+        if data == 'arc2':
+            s1="*.zip"
+            pt1=os.path.join(INDAT, s1)
+            listzip=glob.glob(pt1)
+            print(listzip)
+            for dt1 in listzip:
+                with zipfile.ZipFile(dt1, 'r') as zip_ref:
+                    zip_ref.extractall(INDAT)
+            print('Unzipping files')
+
+            s2="*.tif"
+            pt2=os.path.join(INDAT, s2)
+            listtif=glob.glob(pt2)
+
+            for dt2 in listtif:
+                out1=os.path.basename(dt2)
+                #out2=out1.rsplit('.',1)[0]
+                dt = out1.rsplit('.',2)[1]
+                out = mapset + '_' + dt
+                r.in_gdal(input=dt2, output=out, overwrite=True)
+                ##grass.run_command("r.in.gdal", input=dt, output=out2, overwrite=True)
+
         session.finish()
     finally:
         files = os.listdir(INDAT)
+
+        for item in files:
+            if item.endswith(".zip"):
+                os.remove(os.path.join(INDAT, item))
 
         for item in files:
             if item.endswith(".tif"):

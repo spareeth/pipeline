@@ -54,7 +54,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         
         bnd - Name of the boundary for which statistics needed (use listing of vector boundaries to see the available boundaries)
 
-        data - Options are viirs_ndvi_ea, viirs_ndviano_ea, viirs_ndvi_sa, viirs_ndviano_sa, modis_ndvi, modis_ndviano, chirps, tamsat_monthly, tamsat_daily
+        data - Options are arc2, chirps, tamsat_monthly, tamsat_daily, eandvi_viirs, eandviano_viirs, eandvi_modis, eandviano_modis, sandvi_viirs, sandviano_viirs, sandvi_modis, sandviano_modis
 
         method - statistical metric to be computed - average, minimum, maximum, stddev, median
 
@@ -78,33 +78,51 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         #basepath=os.path.dirname(infile)
         gisdb='/home/ubuntu/s3-mount/mapdata'
         location='latlong'
-        if data == 'viirs_ndvi_ea':
-            mapset = 'ndvi_viirs'
+        if data == 'eandvi_viirs':
+            mapset = 'eandvi_viirs'
+            pat = 'ndvi_viirs'
             p1 = ''
-        elif data == 'viirs_ndviano_ea':
-            mapset = 'ndviano_viirs'
+        elif data == 'eandviano_viirs':
+            mapset = 'eandviano_viirs'
+            pat = 'ndviano_viirs'
             p1 = ''
-        elif data == 'viirs_ndvi_sa':
+        elif data == 'sandvi_viirs':
             mapset = 'sandvi_viirs'
+            pat = 'sandvi_viirs'
             p1 = ''
-        elif data == 'viirs_ndviano_sa':
+        elif data == 'sandviano_viirs':
             mapset = 'sandviano_viirs'
+            pat = 'sandviano_viirs'
             p1 = ''
-        elif data == 'modis_ndvi':
-            mapset = 'ndvi_modis'
-            p1 = 'patch'
+        elif data == 'eandvi_modis':
+            mapset = 'eandvi_modis'
+            pat = 'ndvi_modis'
+            p1 = 'corr'
+        elif data == 'eandviano_modis':
+            mapset = 'eandviano_modis'
+            pat = 'ndviano_modis'
+            p1 = ''
+        elif data == 'sandvi_modis':
+            mapset = 'sandvi_modis'
+            pat = 'sandvi_modis'
+            p1 = 'corr'
+        elif data == 'sandviano_modis':
+            mapset = 'sandviano_modis'
+            pat = 'sandviano_modis'
+            p1 = ''
         elif data == 'chirps':
             mapset = 'chirps'
-            p1 = 'patch'
+            p1 = ''
         elif data == 'tamsat_monthly':
             mapset = 'tamsat'
-            p1 = 'patch'
+            p1 = ''
         elif data == 'tamsat_daily':
             mapset = 'tamsat_daily'
-            p1 = 'patch'
-        elif data == 'modis_ndviano':
-            mapset = 'ndviano_modis'
-            p1 = 'patch'
+            p1 = ''
+        elif data == 'arc2':
+            mapset = 'arc2'
+            pat = 'arc2'
+            p1 = ''
         else:
             print('data is not supported')
             return
@@ -159,7 +177,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
             elif data == 'tamsat_monthly' or data == 'tamsat_daily':
                 pattern="tamsat" + "_rfe" + yr + "_*"
             else:
-                pattern=mapset + "_" + yr + "_*" + p1
+                pattern=pat + "_" + yr + "_*" + p1
             out=tmp + "_" + yr + ".txt"
             grass.run_command("g.list", type="rast", pattern=pattern, map=mapset, output=out, overwrite=True)
 
