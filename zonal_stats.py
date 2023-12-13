@@ -114,7 +114,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
             mapset = 'chirps'
             p1 = ''
         elif data == 'tamsat_monthly':
-            mapset = 'tamsat'
+            mapset = 'tamsat_monthly'
             p1 = ''
         elif data == 'tamsat_daily':
             mapset = 'tamsat_daily'
