@@ -176,6 +176,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
                 pattern=mapset + "_monthly_" + yr + "_*"
             elif data == 'tamsat_monthly' or data == 'tamsat_daily':
                 pattern="tamsat" + "_rfe" + yr + "_*"
+            elif data == 'arc2':
+                pattern=pat + "_" + yr + "*"
             else:
                 pattern=pat + "_" + yr + "_*" + p1
             out=tmp + "_" + yr + ".txt"
