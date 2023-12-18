@@ -21,6 +21,7 @@ from grass.pygrass.modules.shortcuts import general as g
 from grass.pygrass.modules.shortcuts import raster as r
 from grass.pygrass.modules.shortcuts import display as d
 from grass.pygrass.modules.shortcuts import vector as v
+from grass.pygrass.modules.shortcuts import database as db
 from grass.pygrass.gis import *
 import grass.script as grass
 import grass.script.setup as gsetup
@@ -207,7 +208,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         #outfile="stats_" + str(a) + "_" + suffixcsv + ".csv"
         outfile=outcsv + ".csv"
         outfile1=os.path.join(outfolder, outfile)
-        v.out_ogr(input='bnd', output=outfile1, format='CSV', flags="m")
+        db.out_ogr(input='bnd', output=outfile1, format='CSV', flags="m")
         user.close()
     finally:
         #####CLEANUP
@@ -218,8 +219,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         locpth=os.path.join(gisdb, location, jobid)
 
-        if os.path.exists(locpth) and os.path.isdir(locpth):
-           shutil.rmtree(locpth)
+        #if os.path.exists(locpth) and os.path.isdir(locpth):
+        #   shutil.rmtree(locpth)
 
 if __name__ == '__main__':
     main()
