@@ -54,7 +54,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         
         bnd - Name of the boundary for which statistics needed (use listing of vector boundaries to see the available boundaries)
 
-        data - Options are arc2, chirps, tamsat_monthly, tamsat_daily, eandvi_viirs, eandviano_viirs, eandvi_modis, eandviano_modis, sandvi_viirs, sandviano_viirs, sandvi_modis, sandviano_modis
+        data - Options are arc2_daily, chirps_monthly, tamsat_monthly, tamsat_daily, eandvi_viirs, eandviano_viirs, eandvi_modis, eandviano_modis, sandvi_viirs, sandviano_viirs, sandvi_modis, sandviano_modis
 
         method - statistical metric to be computed - average, minimum, maximum, stddev, median
 
@@ -110,8 +110,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
             mapset = 'sandviano_modis'
             pat = 'sandviano_modis'
             p1 = ''
-        elif data == 'chirps':
-            mapset = 'chirps'
+        elif data == 'chirps_monthly':
+            mapset = 'chirps_monthly'
             p1 = ''
         elif data == 'tamsat_monthly':
             mapset = 'tamsat_monthly'
@@ -119,8 +119,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         elif data == 'tamsat_daily':
             mapset = 'tamsat_daily'
             p1 = ''
-        elif data == 'arc2':
-            mapset = 'arc2'
+        elif data == 'arc2_daily':
+            mapset = 'arc2_daily'
             pat = 'arc2'
             p1 = ''
         else:
@@ -172,11 +172,11 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         #with open(tmp, "a") as tmpfile:
         for yr in years_str:
-            if data == 'chirps':
-                pattern=mapset + "_monthly_" + yr + "_*"
+            if data == 'chirps_monthly':
+                pattern=mapset + "_" + yr + "_*"
             elif data == 'tamsat_monthly' or data == 'tamsat_daily':
                 pattern="tamsat" + "_rfe" + yr + "_*"
-            elif data == 'arc2':
+            elif data == 'arc2_daily':
                 pattern=pat + "_" + yr + "*"
             else:
                 pattern=pat + "_" + yr + "_*" + p1

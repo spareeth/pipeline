@@ -38,7 +38,7 @@ def main(data, infolder):
         
         Arguments:
         
-        data - Options are arc2, chirps, tamsat_monthly, tamsat_daily, eandvi_viirs, eandviano_viirs, eandvi_modis, eandviano_modis, sandvi_viirs, sandviano_viirs, sandvi_modis, sandviano_modis
+        data - Options are arc2_daily, chirps_monthly, tamsat_monthly, tamsat_daily, eandvi_viirs, eandviano_viirs, eandvi_modis, eandviano_modis, sandvi_viirs, sandviano_viirs, sandvi_modis, sandviano_modis
 
         infolder - Add the full path to the folder where list of downloaded zip files are stored
 
@@ -69,10 +69,10 @@ def main(data, infolder):
             mapset = 'tamsat_monthly'
         elif data == 'tamsat_daily':
             mapset = 'tamsat_daily'
-        elif data == 'chirps':
-            mapset = 'chirps'
-        elif data == 'arc2':
-            mapset = 'arc2'
+        elif data == 'chirps_monthly':
+            mapset = 'chirps_monthly'
+        elif data == 'arc2_daily':
+            mapset = 'arc2_daily'
         else:
             print('data is not supported')
             return
@@ -148,7 +148,7 @@ def main(data, infolder):
         ## Data source for Chirps - # Chirps monthly: https://data.chc.ucsb.edu/products/CHIRPS-2.0/global_monthly/tifs/
         ## wget -r -np -R "index.html*" -e robots=off https://data.chc.ucsb.edu/products/CHIRPS-2.0/global_monthly/tifs/
         ## chirps-v2.0.2023.06.tif
-        if data == 'chirps':
+        if data == 'chirps_monthly':
             s1="*.gz"
             pt1=os.path.join(INDAT, s1)
             listnc=glob.glob(pt1)
@@ -164,7 +164,7 @@ def main(data, infolder):
                 r.in_gdal(input=in2, output=out, flags="o", overwrite=True)
 
         ## ARC2 Precipitation data
-        if data == 'arc2':
+        if data == 'arc2_daily':
             s1="*.zip"
             pt1=os.path.join(INDAT, s1)
             listzip=glob.glob(pt1)
