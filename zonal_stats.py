@@ -208,7 +208,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         #outfile="stats_" + str(a) + "_" + suffixcsv + ".csv"
         outfile=outcsv + ".csv"
         outfile1=os.path.join(outfolder, outfile)
-        db.out_ogr(input='bnd', output=outfile1, format='CSV', flags="m")
+        v.out_ogr(input='bnd', output=outfile1, format='CSV', flags="m")
         user.close()
     finally:
         #####CLEANUP
