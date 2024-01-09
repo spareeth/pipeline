@@ -47,7 +47,7 @@ def main(data, infolder):
         ## USER INPUTS ##
         data = r"%s" %str(data)
         INDAT = r"%s" %str(infolder)
-        gisdb = '/home/ubuntu/s3-mount/mapdata'
+        gisdb = '/mnt/data/mapdata'
         location = 'latlong'
         if data == 'eandvi_viirs':
             mapset = 'eandvi_viirs'

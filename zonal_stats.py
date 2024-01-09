@@ -77,7 +77,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         #end = r"%s" %str(end)
 
         #basepath=os.path.dirname(infile)
-        gisdb='/home/ubuntu/s3-mount/mapdata'
+        gisdb='/mnt/data/mapdata'
         location='latlong'
         if data == 'eandvi_viirs':
             mapset = 'eandvi_viirs'
@@ -154,7 +154,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         #grass.run_command("v.import", input=infile, output="bnds", overwrite=True)
         #maps = ["ndvi_annual_" + s for s in years_str]
-        g.region(vector=bnd, res=0.001)
+        g.region(vector=bnd, res=0.0001)
         grass.run_command('g.copy', vector=(bnd,'bnd'))
 
         if sh:
@@ -219,8 +219,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         locpth=os.path.join(gisdb, location, jobid)
 
-        #if os.path.exists(locpth) and os.path.isdir(locpth):
-        #   shutil.rmtree(locpth)
+        if os.path.exists(locpth) and os.path.isdir(locpth):
+           shutil.rmtree(locpth)
 
 if __name__ == '__main__':
     main()
