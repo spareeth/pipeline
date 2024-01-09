@@ -29,7 +29,7 @@ from pathlib import Path
 import click
 
 ## USER INPUTS ##
-#infile='/home/ubuntu/data/boundaries/sdn_bnd_admin1_a_gov.shp'
+#infile='/mnt/data/rawdata/boundaries/sdn_bnd_admin1_a_gov.shp'
 #data='viirs_ndvi'
 #start=2023
 #end=2023
@@ -130,7 +130,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         print(mapset)
 
-        indat='/home/ubuntu/s3-mount/.temp'
+        indat='$HOME/.temp'
         ##USER INPUTS FINISH HERE ###
         jobid=str(uuid.uuid4())
         # Python path: we ask GRASS GIS where its Python packages are
