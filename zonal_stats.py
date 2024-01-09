@@ -130,7 +130,8 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
 
         print(mapset)
 
-        indat='$HOME/.temp'
+        in1 = os.environ['HOME']
+        indat = in1 + '/.temp'
         ##USER INPUTS FINISH HERE ###
         jobid=str(uuid.uuid4())
         # Python path: we ask GRASS GIS where its Python packages are
