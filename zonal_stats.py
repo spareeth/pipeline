@@ -122,7 +122,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
             p1 = ''
         elif data == 'arc2_daily':
             mapset = 'arc2_daily'
-            pat = 'arc2'
+            pat = 'arc2_daily'
             p1 = ''
         else:
             print('data is not supported')
