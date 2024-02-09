@@ -81,11 +81,11 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         location='latlong'
         if data == 'eandvi_viirs':
             mapset = 'eandvi_viirs'
-            pat = 'ndvi_viirs'
+            pat = 'eandvi_viirs'
             p1 = ''
         elif data == 'eandviano_viirs':
             mapset = 'eandviano_viirs'
-            pat = 'ndviano_viirs'
+            pat = 'eandviano_viirs'
             p1 = ''
         elif data == 'sandvi_viirs':
             mapset = 'sandvi_viirs'
@@ -97,11 +97,11 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
             p1 = ''
         elif data == 'eandvi_modis':
             mapset = 'eandvi_modis'
-            pat = 'ndvi_modis'
+            pat = 'eandvi_modis'
             p1 = 'corr'
         elif data == 'eandviano_modis':
             mapset = 'eandviano_modis'
-            pat = 'ndviano_modis'
+            pat = 'eandviano_modis'
             p1 = ''
         elif data == 'sandvi_modis':
             mapset = 'sandvi_modis'
