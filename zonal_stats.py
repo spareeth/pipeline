@@ -167,7 +167,7 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
             r.mask(raster=wc, maskcats='30')
         elif cr:
             r.mask(raster=wc, maskcats='40')
-        elif sg:
+        elif sg:....
             r.mask(raster=wc, maskcats='20 30')
         else:
             print('No mask')
