@@ -160,15 +160,15 @@ def main(sh, gr, cr, sg, bnd, data, method, outfolder, outcsv, start, end):
         g.region(vector=bnd, res=0.0002)
         bound = bnd + '@boundaries'
         grass.run_command('g.copy', vector=(bound,'bnd'))
-
+        wc = 'worldcover' + '@worldcover'
         if sh:
-            r.mask(raster="worldcover", maskcats='20')
+            r.mask(raster=wc, maskcats='20')
         elif gr:
-            r.mask(raster="worldcover", maskcats='30')
+            r.mask(raster=wc, maskcats='30')
         elif cr:
-            r.mask(raster="worldcover", maskcats='40')
+            r.mask(raster=wc, maskcats='40')
         elif sg:
-            r.mask(raster="worldcover", maskcats='20 30')
+            r.mask(raster=wc, maskcats='20 30')
         else:
             print('No mask')
 
