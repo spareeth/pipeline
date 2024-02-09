@@ -183,7 +183,7 @@ def main(data, infolder):
                 #out2=out1.rsplit('.',1)[0]
                 dt = out1.rsplit('.',2)[1]
                 out = mapset + '_' + dt
-                r.in_gdal(input=dt2, output=out, overwrite=True)
+                r.in_gdal(input=dt2, output=out, flags="o", overwrite=True)
                 ##grass.run_command("r.in.gdal", input=dt, output=out2, overwrite=True)
 
         session.finish()
